@@ -165,7 +165,6 @@ const article = (obj) => {
     nodes[4].textContent = obj.thirdParagraph;
 
     // Return component
-    console.log(obj, nodes);
     return document.querySelector('.articles').append(article);
 }
 
