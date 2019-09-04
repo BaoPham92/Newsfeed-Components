@@ -142,6 +142,9 @@ const article = (obj) => {
         }
     }
 
+    // Nodes
+    let nodes;
+
     // New Elements
     const article = create('div', 'article');
     const header = article.append(create('h2'));
@@ -151,17 +154,42 @@ const article = (obj) => {
     const p4 = article.append(create('p'));
     const span = article.append(create('span', 'expandButton'));
 
+    // Update nodes variable
+    nodes = article.children;
+
+    // Update textContent
+    nodes[0].textContent = obj.title;
+    nodes[1].textContent = obj.date;
+    nodes[2].textContent = obj.firstParagraph;
+    nodes[3].textContent = obj.secondParagraph;
+    nodes[4].textContent = obj.thirdParagraph;
+
     // Return component
+    console.log(obj, nodes);
     return document.querySelector('.articles').append(article);
 }
 
-// Invocations
-article();
+// Iterate over data for invocations
+data.forEach((index) => {
+    // Invocations
+    return article(index);
+})
+
+// Create a new article with NEW DATA
+article({
+    title: 'Blockchain will takeover the world!',
+    date: 'September, 4th',
+    firstParagraph: `Blockchain will be the replacement of the society's main problem, running on trust. Lorem ipsum scaling sit blockchain, decentralized economy elit, sed do replace tempor monetary ut labore et dollare magna distributed. Ut smart contracts ad minim transaction fees, quis notarization masternode proof-of-laboris profit nisi ut governance ea investment consequat. Dual chain irure dolor in reprehenderit in voluptate sharding peg instant dollare eu fugiat nulla confirmations. Entrepreneur sint opportunity cupidatat profound, sunt in features qui officia presale join telegram id est launching.`,
+
+    secondParagraph: `Blockchain will help drastically solve world problems. Lorem ipsum scaling sit blockchain, decentralized economy elit, sed do replace tempor monetary ut labore et dollare magna distributed. Ut smart contracts ad minim transaction fees, quis notarization masternode proof-of-laboris profit nisi ut governance ea investment consequat. Dual chain irure dolor in reprehenderit in voluptate sharding peg instant dollare eu fugiat nulla confirmations. Entrepreneur sint opportunity cupidatat profound, sunt in features qui officia presale join telegram id est launching.`,
+
+    thirdParagraph: `Lorem ipsum scaling sit blockchain, decentralized economy elit, sed do replace tempor monetary ut labore et dollare magna distributed. Ut smart contracts ad minim transaction fees, quis notarization masternode proof-of-laboris profit nisi ut governance ea investment consequat. Dual chain irure dolor in reprehenderit in voluptate sharding peg instant dollare eu fugiat nulla confirmations. Entrepreneur sint opportunity cupidatat profound, sunt in features qui officia presale join telegram id est launching.`
+})
 
 // Event Listeners for all span tags
 document.querySelectorAll('.expandButton').forEach(index => {
     index.addEventListener('click', (e) => {
         // Expand the parent element the span is nested in.
         return e.path["0"].parentNode.classList.toggle('article-open');
-    })  
+    })
 })
